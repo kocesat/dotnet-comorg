@@ -1,0 +1,53 @@
+﻿@model IEnumerable<
+    ComorgApp.Entities.Participant>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card border-light box-shadow">
+    <div class="card-header bg-white">
+        <div class="d-flex justify-content-between">
+            <h4 class="text-info">Participants</h4>
+            <a class="btn btn-info box-shadow" asp-action="Create">+ New</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover table-responsive-md">
+            <thead>
+                <tr>
+                    <th>
+                        Participant Code
+                    </th>
+                    <th>
+                        Participant Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
