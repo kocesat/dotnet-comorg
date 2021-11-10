@@ -11,7 +11,6 @@
     <div class="card-header">
         <div class="d-flex justify-content-between">
             <h4 class="text-info">Participants</h4>
-            <a class="btn btn-info" asp-action="Create">+ New</a>
         </div>
     </div>
     <div class="card-body scroll">
@@ -23,9 +22,6 @@
                     </th>
                     <th>
                         Participant Name
-                    </th>
-                    <th>
-                        Actions
                     </th>
                 </tr>
             </thead>
@@ -39,11 +35,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
-                        <td>
-                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
                     </tr>
                 }
             </tbody>
@@ -51,13 +42,3 @@
     </div>
 
 </div>
-
-<script>
-    $(document).ready(function(){
-        $('#participantTable').hover(function() {
-            $(this).removeClass('shadow-sm');
-        }, function(){
-            $(this).addClass('shadow-sm');
-        });
-    });
-</script>

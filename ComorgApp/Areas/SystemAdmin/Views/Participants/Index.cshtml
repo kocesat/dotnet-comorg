@@ -1,0 +1,68 @@
+﻿@model IEnumerable<
+    ComorgApp.Entities.Participant>
+
+@{
+    ViewData["Title"] = "System Admin Index";
+    Layout = "~/Areas/SystemAdmin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card border-light" id="participantTable">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <h4 class="text-info">Participants</h4>
+        </div>
+    </div>
+    <div class="card-body scroll">
+        <table class="table table-hover table-sm table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>
+                        Participant Code
+                    </th>
+                    <th>
+                        Participant Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <a asp-area="SystemAdmin" 
+                                asp-controller="Participants" 
+                                asp-action="Edit"
+                                asp-route-id=@item.Id
+                                class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+                            <a asp-area="SystemAdmin" 
+                                asp-controller="Participants" 
+                                asp-action="Delete"
+                                asp-route-id=@item.Id
+                                class="btn btn-sm btn-danger">
+                                Delete
+                            </a>
+                            <a asp-area="SystemAdmin" 
+                                asp-controller="Participants" 
+                                asp-action="Details"
+                                asp-route-id=@item.Id
+                                class="btn btn-info btn-sm">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -29,7 +29,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.ParticipantId"></label>
-                <input asp-for="Input.ParticipantId" class="form-control" />
+                <select asp-for="Input.ParticipantId" asp-items=@ViewBag.Participants>
+                    <option>--Select your participant--</option>
+                </select>
                 <span asp-validation-for="Input.ParticipantId" class="text-danger"></span>
             </div>
             <div class="form-group">
