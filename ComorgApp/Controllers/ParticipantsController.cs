@@ -22,7 +22,8 @@ namespace ComorgApp.Controllers
         // GET: Participants
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Participants.ToListAsync());
+            var participants = _context.Participants.OrderBy(x => x.Code);
+            return View(await participants.ToListAsync());
         }
 
         // GET: Participants/Details/5
