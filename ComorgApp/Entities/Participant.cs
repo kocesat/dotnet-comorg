@@ -19,6 +19,13 @@ namespace ComorgApp.Entities
         [Required]
         [StringLength(240, MinimumLength = 2)]
         public string Name { get; set; }
+
+        public string CodeAndName { get; set; }
         public ICollection<ApplicationUser> Users { get; set; }
+
+        public Participant()
+        {
+            CodeAndName = $"{Code} - {Name}";
+        }
     }
 }

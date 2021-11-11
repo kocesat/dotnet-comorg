@@ -85,7 +85,7 @@ namespace ComorgApp.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ViewData["Participants"] = new SelectList(_context.Participants, "Id", "Name", 0);
+            ViewData["Participants"] = new SelectList(_context.Participants, "Id", "CodeAndName", 0);
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }

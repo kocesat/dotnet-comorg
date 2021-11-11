@@ -5,7 +5,9 @@
         <a class="dropdown-item" asp-area="SystemAdmin" 
            asp-controller="Participants" 
            asp-action="Index">Participants</a>
-        <a class="dropdown-item" href="#">Users</a>
+        <a class="dropdown-item" asp-area="SystemAdmin" 
+           asp-controller="ApplicationUsers" 
+           asp-action="Index">Users</a>
         @*Divider*@
         <div class="dropdown-divider"></div>    
         <a class="dropdown-item" href="#">Document Management</a>

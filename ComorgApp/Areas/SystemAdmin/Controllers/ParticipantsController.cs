@@ -59,6 +59,8 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
+                // TODO: Set CodeAndName automatically without the following code
+                participant.CodeAndName = $"{participant.Code} - {participant.Name}";
                 _context.Add(participant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

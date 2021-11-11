@@ -1,0 +1,52 @@
+﻿@model IEnumerable<
+    ComorgApp.Data.ApplicationUser>
+
+@{
+    ViewData["Title"] = "System Admin Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card border-light">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <h4 class="text-info">Users</h4>
+        </div>
+    </div>
+    <div class="card-body scroll">
+        <table class="table table-hover table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>
+                        Full Name
+                    </th>
+                    <th>
+                        Participant
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)  @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Participant.CodeAndName)
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-primary rounded-pill"> Activate</a>
+                            <a class="btn btn-outline-info rounded-pill"> Assign Role</a>
+                            <a class="btn btn-outline-danger rounded-pill" >Deactivate</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

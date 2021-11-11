@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "System Admin Index";
-    Layout = "~/Areas/SystemAdmin/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -11,6 +11,7 @@
     <div class="card-header">
         <div class="d-flex justify-content-between">
             <h4 class="text-info">Participants</h4>
+            <a class="btn-primary btn" asp-area="SystemAdmin" asp-controller="Participants" asp-action="Create">+ Add Participant</a>
         </div>
     </div>
     <div class="card-body scroll">
