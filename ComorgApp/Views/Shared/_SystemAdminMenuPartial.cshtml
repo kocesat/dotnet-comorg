@@ -4,12 +4,15 @@
     <div class="dropdown-menu">
         <a class="dropdown-item" asp-area="SystemAdmin" 
            asp-controller="Participants" 
-           asp-action="Index">Participants</a>
+           asp-action="Index">Participant Management</a>
         <a class="dropdown-item" asp-area="SystemAdmin" 
            asp-controller="ApplicationUsers" 
-           asp-action="Index">Users</a>
+           asp-action="Index">User Management</a>
         @*Divider*@
         <div class="dropdown-divider"></div>    
+        <a class="dropdown-item" asp-area="SystemAdmin" 
+                                 asp-controller="Broadcasts"
+                                 asp-action="Index">Broadcast Management</a>
         <a class="dropdown-item" href="#">Document Management</a>
     </div>   
 </li>
