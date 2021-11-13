@@ -27,7 +27,9 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
             var vm = new BroadcastViewModel()
             {
                 Broadcast = new Broadcast(),
-                Broadcasts = await _context.Broadcasts.ToListAsync()
+                Broadcasts = await _context.Broadcasts
+                                    .OrderByDescending(b => b.Created)
+                                    .ToListAsync()
             };
 
             return View(vm);
@@ -62,10 +64,12 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Subject,Content,Created,IsPublished")] Broadcast broadcast)
+        public async Task<IActionResult> Create([Bind("Id,Subject,Content,IsPublished")] Broadcast broadcast)
         {
             if (ModelState.IsValid)
             {
+                broadcast.Created = DateTime.Now;
+                broadcast.LastModified = DateTime.Now;
                 _context.Add(broadcast);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +98,7 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Subject,Content,Created,IsPublished")] Broadcast broadcast)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Subject,Content,IsPublished")] Broadcast broadcast)
         {
             if (id != broadcast.Id)
             {
@@ -105,7 +109,11 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
             {
                 try
                 {
-                    _context.Update(broadcast);
+                    var broadcastInDb = _context.Broadcasts.Single(b => b.Id == broadcast.Id);
+                    broadcastInDb.LastModified = DateTime.Now;
+                    broadcastInDb.Subject = broadcast.Subject;
+                    broadcastInDb.Content = broadcast.Content;
+                    broadcastInDb.IsPublished = broadcast.IsPublished;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -148,6 +156,7 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var broadcast = await _context.Broadcasts.FindAsync(id);
+            broadcast.LastModified = DateTime.Now;
             _context.Broadcasts.Remove(broadcast);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
