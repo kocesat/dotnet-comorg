@@ -1,77 +1,106 @@
-﻿@model IEnumerable<ComorgApp.Entities.Broadcast>
+﻿@model ComorgApp.Models.BroadcastViewModel;
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10" id="accordion">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Make a broadcast
+                    </button>
+                </h5>
+            </div>
 
-<div class="row text-center">
-    <div class="card">
-        <div class="card-header">
-            Card 1
+            <div class="card-body">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Broadcast.Subject" class="control-label"></label>
+                            <input asp-for="Broadcast.Subject" class="form-control" />
+                            <span asp-validation-for="Broadcast.Subject" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Broadcast.Content" class="control-label"></label>
+                            <textarea rows="10" style="height:850%;" asp-for="Broadcast.Content" class="form-control"> </textarea>
+                            <span asp-validation-for="Broadcast.Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Broadcast.Created" class="control-label"></label>
+                            <input asp-for="Broadcast.Created" class="form-control" />
+                            <span asp-validation-for="Broadcast.Created" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Broadcast.IsPublished" /> Publish immediately
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+                                
         </div>
-        <div class="card-body"> 
-
+        <div class="card mb-3">
+            <div class="card-header">
+                Broadcasts
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Content</th>
+                            <th>Creation Time</th>
+                            <th>Published?</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Broadcasts) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Subject)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Created)
+                            </td>
+                            @if (item.IsPublished)
+                            {
+                                <td>Yes</td>
+                            } else
+                            {
+                                <td>No</td>
+                            }
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Remove</a>
+                                @if(item.IsPublished)
+                                {
+                                    <a asp-action="" asp-route-id="@item.Id">Unpublish</a>
+                                } else
+                                {
+                                    <a asp-action="" asp-route-id="@item.Id">Publish</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         </div>
-
     </div>
-    <div class="card">
-        <div class="card-header">
-            Card 2
-        </div>
-        <div class="card-body"> 
-
-        </div>
-
-    </div>
-
+    <div class="col-md-1"></div>
 </div>
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPublished)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPublished)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ComorgApp.Data;
 using ComorgApp.Entities;
+using ComorgApp.Models;
 
 namespace ComorgApp.Areas.SystemAdmin.Controllers
 {
@@ -23,7 +24,13 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
         // GET: SystemAdmin/Broadcasts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Broadcasts.ToListAsync());
+            var vm = new BroadcastViewModel()
+            {
+                Broadcast = new Broadcast(),
+                Broadcasts = await _context.Broadcasts.ToListAsync()
+            };
+
+            return View(vm);
         }
 
         // GET: SystemAdmin/Broadcasts/Details/5
