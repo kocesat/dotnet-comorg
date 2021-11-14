@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - ComorgApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @*TINY MCE Javascript*@
+    <script src="https://cdn.tiny.cloud/1/wqzmebj99fsxcjj12pw9653zzf1wcg3w4awa24exo4c4tpe1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
     <header>
@@ -25,6 +27,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Participants" asp-action="Index">Participants</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Broadcasts" asp-action="Index">Broadcasts</a>
                         </li>
                         <partial name="_SystemAdminMenuPartial" />
                         <li class="nav-item">

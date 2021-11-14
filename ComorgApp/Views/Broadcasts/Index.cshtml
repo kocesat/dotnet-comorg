@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ComorgApp.Entities.Broadcast>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Broadcasts</h2>
+@foreach(var broadcast in Model)
+{
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="card-title">
+            @broadcast.Subject
+        </h4>
+    </div>
+    <div class="card-body">
+        @Html.Raw(broadcast.Content)
+    </div>
+    <div class="card-footer">
+        <p class="text-muted">Created: @broadcast.Created, Last Modified: @broadcast.LastModified</p>
+    </div>
+</div>    
+}
