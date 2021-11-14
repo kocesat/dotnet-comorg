@@ -7,23 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ComorgApp.Data;
 using ComorgApp.Entities;
+using ComorgApp.Interfaces;
 
 namespace ComorgApp.Controllers
 {
     public class ParticipantsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public ParticipantsController(ApplicationDbContext context)
+        private readonly IUnitOfWork unitOfWork;
+        public ParticipantsController(ApplicationDbContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: Participants
         public async Task<IActionResult> Index()
         {
-            var participants = _context.Participants.OrderBy(x => x.Code);
-            return View(await participants.ToListAsync());
+            var participants = await unitOfWork.Participants.GetAll();
+            return View(participants);
         }
     }
 }

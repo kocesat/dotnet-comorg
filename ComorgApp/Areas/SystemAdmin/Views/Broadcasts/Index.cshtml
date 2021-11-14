@@ -80,10 +80,10 @@
                                 <a asp-action="Delete" asp-route-id="@item.Id">Remove</a> |
                                 @if(item.IsPublished)
                                 {
-                                    <a asp-action="" asp-route-id="@item.Id">Unpublish</a>
+                                    <a asp-action="Unpublish" asp-route-id="@item.Id">Unpublish</a>
                                 } else
                                 {
-                                    <a asp-action="" asp-route-id="@item.Id">Publish</a>
+                                    <a asp-action="Publish" asp-route-id="@item.Id">Publish</a>
                                 }
                             </td>
                         </tr>

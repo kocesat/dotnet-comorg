@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ComorgApp.Data;
 using ComorgApp.Entities;
 using ComorgApp.Models;
+using ComorgApp.Interfaces;
 
 namespace ComorgApp.Areas.SystemAdmin.Controllers
 {
@@ -15,10 +16,11 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
     public class BroadcastsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public BroadcastsController(ApplicationDbContext context)
+        private readonly IUnitOfWork _unitOfWork;
+        public BroadcastsController(ApplicationDbContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: SystemAdmin/Broadcasts
@@ -28,7 +30,7 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
             {
                 Broadcast = new Broadcast(),
                 Broadcasts = await _context.Broadcasts
-                                    .OrderByDescending(b => b.Created)
+                                    .OrderByDescending(b => b.LastModified)
                                     .ToListAsync()
             };
 
@@ -132,6 +134,44 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
             return View(broadcast);
         }
 
+        public async Task<IActionResult> Publish(int? id)
+        {
+            // TODO: Apply Bootstrap Alert
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var broadcast = await _unitOfWork.Broadcasts.Get((int)id);
+            if (broadcast == null)
+            {
+                return NotFound();
+            }
+            broadcast.IsPublished = true;
+            broadcast.LastModified = DateTime.Now;
+            await _unitOfWork.Complete();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Unpublish(int? id)
+        {
+            // TODO: Apply Bootstrap Alert
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var broadcast = await _unitOfWork.Broadcasts.Get((int)id);
+            if (broadcast == null)
+            {
+                return NotFound();
+            }
+            broadcast.IsPublished = false;
+            broadcast.LastModified = DateTime.Now;   
+            await _unitOfWork.Complete();
+            return RedirectToAction("Index");
+        }
+
         // GET: SystemAdmin/Broadcasts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -161,6 +201,7 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool BroadcastExists(int id)
         {
