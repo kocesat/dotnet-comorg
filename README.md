@@ -6,6 +6,8 @@ Participants can manage their staff who need to access to all kind of resources 
 
 This app implements a custom ApplicationUser model extended from IdentityUser class provided by ASP.NET Identity. 
 
-![Screenshot](master/ComorgApp/wwwroot/AppImages/broadcastUserLook.png)
+![Screenshot](AppImages/broadcastUserLook.PNG)
+![Screenshot](AppImages/broadcastAdminList.PNG)
+![Screenshot](AppImages/broadcastEditor.PNG)
 
 This app requires .NET 5
