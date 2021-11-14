@@ -37,6 +37,9 @@ namespace ComorgApp
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            // Comorg Applications Services
+            services.AddScoped<IFolderRepository, FolderRepository>();
             services.AddScoped<IBroadcastRepository, BroadcastRepository>();
             services.AddScoped<IParticipantRepository, ParticipantRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

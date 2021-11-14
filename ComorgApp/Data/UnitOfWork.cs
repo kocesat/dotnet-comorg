@@ -12,14 +12,16 @@ namespace ComorgApp.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
+        public IBroadcastRepository Broadcasts { get; private set; }
+        public IParticipantRepository Participants { get; private set; }
+        public IFolderRepository Folders { get; private set; }
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
+            Folders = new FolderRepository(_context);
             Broadcasts = new BroadcastRepository(_context);
             Participants = new ParticipantRepository(_context);
         }
-        public IBroadcastRepository Broadcasts { get; private set; }
-        public IParticipantRepository Participants { get; private set; }
 
         public async Task<int> Complete()
         {

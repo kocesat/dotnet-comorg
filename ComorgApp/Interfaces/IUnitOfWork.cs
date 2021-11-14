@@ -10,6 +10,7 @@ namespace ComorgApp.Interfaces
     {
         IBroadcastRepository Broadcasts { get; }
         IParticipantRepository Participants { get; }
+        IFolderRepository Folders { get; }
         Task<int> Complete();
     }
 }

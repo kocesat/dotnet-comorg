@@ -29,7 +29,7 @@ namespace ComorgApp.Repositories
         public ApplicationDbContext ApplicationDbContext {
             get
             {
-                return Context as ApplicationDbContext;
+                return base.Context as ApplicationDbContext;
             }
         }
     }
