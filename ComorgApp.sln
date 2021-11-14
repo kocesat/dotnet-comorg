@@ -10,6 +10,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppImages", "AppImages", "{2955103A-4278-4E10-9B96-A9D6A480DFC2}"
+	ProjectSection(SolutionItems) = preProject
+		ComorgApp\wwwroot\AppImages\broadcastAdminList.PNG = ComorgApp\wwwroot\AppImages\broadcastAdminList.PNG
+		ComorgApp\wwwroot\AppImages\broadcastEditor.PNG = ComorgApp\wwwroot\AppImages\broadcastEditor.PNG
+		ComorgApp\wwwroot\AppImages\broadcastUserLook.PNG = ComorgApp\wwwroot\AppImages\broadcastUserLook.PNG
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +30,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2955103A-4278-4E10-9B96-A9D6A480DFC2} = {B03F1D1E-78BA-4939-9554-E841F0574FF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {418B83B8-C110-4559-9430-CE9F7A5B92AF}
