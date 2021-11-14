@@ -10,7 +10,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-sm table-hover">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -32,10 +32,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a class="btn btn-outline-info" asp-controller="Folders" asp-action="SubFolders" asp-route-id="@item.Id">
-                    <span><i class="bi bi-folder"></i></span>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </a>
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Created)

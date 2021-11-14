@@ -1,16 +1,27 @@
 ﻿@model IEnumerable<ComorgApp.Entities.Folder>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Documents";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h5>Documentation</h5>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table table-sm table-hover">
+<div class="card">
+    @*TODO: Add Folder Up button to header*@
+@*    <div class="card-header">
+        @if (Model.Any() && Model.FirstOrDefault() != null)
+        {
+            <a class="btn btn-info" asp-controller="Folders" asp-action="SubFolders" 
+                                    asp-route-id="@Model.FirstOrDefault().ParentFolder.ParentFolderId">
+                <i class="bi bi-arrow-90deg-up"></i>
+            </a>
+        }
+    </div> *@
+    <div class="card-body">
+    @if (Model.Any())
+    {
+        <table class="table table-sm table-hover">
     <thead>
         <tr>
             <th>
@@ -46,12 +57,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ParentFolder.Name)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
         </tr>
 }
     </tbody>
-</table>
+            </table>
+
+        }else
+        {
+            <p>No element here...</p>
+        }
+
+    </div>
+</div>

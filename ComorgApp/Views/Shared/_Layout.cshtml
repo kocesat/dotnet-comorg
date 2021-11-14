@@ -6,8 +6,12 @@
     <title>@ViewData["Title"] - ComorgApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    
     @*TINY MCE Javascript*@
     <script src="https://cdn.tiny.cloud/1/wqzmebj99fsxcjj12pw9653zzf1wcg3w4awa24exo4c4tpe1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    
+    @*Bootstrap 5 icons*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -32,7 +36,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Broadcasts" asp-action="Index">Broadcasts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Folders" asp-action="Index">Documents</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Folders" asp-action="SubFolders" asp-route-id="">Documents</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">User Management</a>
