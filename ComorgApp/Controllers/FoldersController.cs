@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ComorgApp.Data;
 using ComorgApp.Entities;
 using ComorgApp.Interfaces;
+using ComorgApp.Models;
 
 namespace ComorgApp.Controllers
 {
@@ -29,10 +30,26 @@ namespace ComorgApp.Controllers
         }
 
         // GET: Folders/Subfolders
-        public async Task<IActionResult> SubFolders(int? id)
+        // Giving a folder id, it returns its subfolders and containing documents
+        public async Task<IActionResult> SubFoldersAndDocuments(int? id)
         {
-            var subfolders = await _unitOfWork.Folders.GetSubFoldersAsync(id);
-            return View(subfolders);
+            IEnumerable<Document> documents = null;
+            if (id != null)
+            {
+                var folder = await _unitOfWork.Folders.GetWithDocumentsAsync(id);
+                if (folder != null)
+                {
+                    documents = folder.Documents;
+                }
+            }
+            var subfolders = await _unitOfWork.Folders.GetSubFoldersAndDocumentsAsync(id);
+
+            var vm = new FolderDocumentViewModel()
+            {
+                Folders = subfolders,
+                Documents = documents
+            };
+            return View(vm);
         }
 
         // GET: Folders/Details/5

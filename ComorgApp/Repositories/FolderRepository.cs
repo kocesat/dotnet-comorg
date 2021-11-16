@@ -24,7 +24,7 @@ namespace ComorgApp.Repositories
             }
         }
 
-        public async Task<IEnumerable<Folder>> GetSubFoldersAsync(int? id)
+        public async Task<IEnumerable<Folder>> GetSubFoldersAndDocumentsAsync(int? id)
         {
             if (id == null)
             {
@@ -37,9 +37,18 @@ namespace ComorgApp.Repositories
             return await ApplicationDbContext.Folders
                             .Where(folder => folder.ParentFolderId == id)
                             .Include(f => f.ParentFolder)
+                            .Include(f => f.SubFolders)
                             .OrderBy(f => f.Created)
                             .ToListAsync();
         }
 
+        public async Task<Folder> GetWithDocumentsAsync(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+            return await ApplicationDbContext.Folders.Include(f => f.Documents).FirstOrDefaultAsync(f => f.Id == id);   
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace ComorgApp.Interfaces
 {
     public interface IFolderRepository : IRepository<Folder>
     {
-        Task<IEnumerable<Folder>> GetSubFoldersAsync(int? id);
+        Task<IEnumerable<Folder>> GetSubFoldersAndDocumentsAsync(int? id);
+        Task<Folder> GetWithDocumentsAsync(int? id);
     }
 }

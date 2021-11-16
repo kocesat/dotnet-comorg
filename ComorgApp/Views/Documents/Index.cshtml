@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ComorgApp.Entities.Folder>
+﻿@model IEnumerable<ComorgApp.Entities.Document>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,13 +17,25 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VersionNumber)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Created)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastModified)
+                @Html.DisplayNameFor(model => model.LastUpdated)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ParentFolder)
+                @Html.DisplayNameFor(model => model.Folder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Extension)
             </th>
             <th></th>
         </tr>
@@ -35,13 +47,25 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VersionNumber)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastModified)
+                @Html.DisplayFor(modelItem => item.LastUpdated)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParentFolder.Name)
+                @Html.DisplayFor(modelItem => item.Folder.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Extension)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

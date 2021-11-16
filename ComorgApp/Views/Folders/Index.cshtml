@@ -32,7 +32,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a class="btn btn-outline-info" asp-controller="Folders" asp-action="SubFolders" asp-route-id="@item.Id">
+                <a class="btn btn-outline-info" asp-controller="Folders" asp-action="SubFoldersAndDocuments" asp-route-id="@item.Id">
                     <span><i class="bi bi-folder"></i></span>
                     @Html.DisplayFor(modelItem => item.Name)
                 </a>

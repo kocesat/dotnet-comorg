@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ComorgApp.Entities
@@ -14,5 +15,7 @@ namespace ComorgApp.Entities
         public DateTime? LastModified { get; set; }
         public int? ParentFolderId { get; set; }
         public Folder ParentFolder { get; set; }
+        public ICollection<Folder> SubFolders { get; set; }
+        public ICollection<Document> Documents { get; set; }
     }
 }

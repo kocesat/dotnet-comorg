@@ -9,6 +9,7 @@ namespace ComorgApp.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public DbSet<Document> Documents { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Broadcast> Broadcasts { get; set; }
         public DbSet<Folder> Folders { get; set; }

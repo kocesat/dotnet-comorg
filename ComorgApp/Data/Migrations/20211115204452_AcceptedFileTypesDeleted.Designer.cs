@@ -4,14 +4,16 @@ using ComorgApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComorgApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211115204452_AcceptedFileTypesDeleted")]
+    partial class AcceptedFileTypesDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,10 +65,7 @@ namespace ComorgApp.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FolderId")
+                    b.Property<int>("DocumentTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdated")
@@ -80,15 +79,28 @@ namespace ComorgApp.Data.Migrations
                     b.Property<int>("Version")
                         .HasColumnType("int");
 
-                    b.Property<string>("VersionNumber")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentTypeId")
+                        .IsUnique();
+
+                    b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("ComorgApp.Entities.DocumentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FolderId");
-
-                    b.ToTable("Documents");
+                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("ComorgApp.Entities.Folder", b =>
@@ -372,19 +384,19 @@ namespace ComorgApp.Data.Migrations
 
             modelBuilder.Entity("ComorgApp.Entities.Document", b =>
                 {
-                    b.HasOne("ComorgApp.Entities.Folder", "Folder")
-                        .WithMany("Documents")
-                        .HasForeignKey("FolderId")
+                    b.HasOne("ComorgApp.Entities.DocumentType", "DocumentType")
+                        .WithOne("Document")
+                        .HasForeignKey("ComorgApp.Entities.Document", "DocumentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Folder");
+                    b.Navigation("DocumentType");
                 });
 
             modelBuilder.Entity("ComorgApp.Entities.Folder", b =>
                 {
                     b.HasOne("ComorgApp.Entities.Folder", "ParentFolder")
-                        .WithMany("SubFolders")
+                        .WithMany()
                         .HasForeignKey("ParentFolderId");
 
                     b.Navigation("ParentFolder");
@@ -452,11 +464,9 @@ namespace ComorgApp.Data.Migrations
                     b.Navigation("Participant");
                 });
 
-            modelBuilder.Entity("ComorgApp.Entities.Folder", b =>
+            modelBuilder.Entity("ComorgApp.Entities.DocumentType", b =>
                 {
-                    b.Navigation("Documents");
-
-                    b.Navigation("SubFolders");
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("ComorgApp.Entities.Participant", b =>
