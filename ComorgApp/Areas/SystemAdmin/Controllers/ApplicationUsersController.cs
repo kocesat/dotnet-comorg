@@ -19,5 +19,6 @@ namespace ComorgApp.Areas.SystemAdmin.Controllers
             var users = _userManager.Users.Include(u => u.Participant);
             return View(await users.ToListAsync());
         }
+
     }
 }

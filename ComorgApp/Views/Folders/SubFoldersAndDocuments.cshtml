@@ -8,16 +8,8 @@
 <h5>Documentation</h5>
 
 <div class="card">
-    @*TODO: Add Folder Up button to header*@
-@*    <div class="card-header">
-        @if (Model.Any() && Model.FirstOrDefault() != null)
-        {
-            <a class="btn btn-info" asp-controller="Folders" asp-action="SubFolders" 
-                                    asp-route-id="@Model.FirstOrDefault().ParentFolder.ParentFolderId">
-                <i class="bi bi-arrow-90deg-up"></i>
-            </a>
-        }
-    </div> *@
+    <div class="card-header">
+    </div>
     <div class="card-body">
     @if (Model.Folders.Any())
     {
@@ -44,8 +36,8 @@
             @foreach (var item in Model.Folders) {
                 <tr>
                     <td>
-                        <a class="btn btn-outline-info" asp-controller="Folders" asp-action="SubFoldersAndDocuments" asp-route-id="@item.Id">
-                            <span><i class="bi bi-folder"></i></span>
+                        <a class="btn btn-block text-left btn-outline-info" asp-controller="Folders" asp-action="SubFoldersAndDocuments" asp-route-id="@item.Id">
+                            <span><i class="bi bi-folder-fill" style="font-size:1.25rem;"></i></span>
                             @Html.DisplayFor(modelItem => item.Name)
                         </a>
                     </td>
@@ -68,7 +60,7 @@
                     <tr>
                         <td>
                             <a href="#" >
-                                <span><i class="bi bi-file-@Html.Raw(document.Extension)-fill"></i></span>
+                                <span><i style="font-size: 1.25rem;" class="bi bi-file-@Html.Raw(document.Extension)-fill"></i></span>
                                 @document.Name
                             </a>
                         </td>

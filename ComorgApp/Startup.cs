@@ -42,6 +42,7 @@ namespace ComorgApp
             services.AddScoped<IFolderRepository, FolderRepository>();
             services.AddScoped<IBroadcastRepository, BroadcastRepository>();
             services.AddScoped<IParticipantRepository, ParticipantRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
